@@ -54,19 +54,8 @@ export default function Basics({
         return <IconComponent className={`flex-shrink-0 text-gray-500 ${className}`} />
     }
 
-    /*
-    "customFields": [
-      {
-        "id": "oc19gord8tfgc24crhg75xjs",
-        "icon": "car",
-        "name": "Permis B & véhiculé",
-        "value": ""
-      }
-    ],
-    */
-
     return (
-        <div className="flex flex-row items-center justify-between gap-16 h-fit w-full rounded-lg p-8">
+        <div className="flex flex-row items-center justify-between gap-16 h-fit w-full rounded-lg">
             <div className="flex flex-col items-start justify-center gap-4 h-fit">
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                     <div className="text-center sm:text-left flex flex-col gap-2">
