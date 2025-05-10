@@ -39,7 +39,7 @@ npm run preview
 
 ## Project Structure
 
-- `/src/assets/resume.json`: The JSON file exported from Reactive Resume
+- `/src/assets/resume/resume.json`: The JSON file exported from Reactive Resume
 - `/src/pages/_components`: Components for each section of the CV
 - `/src/pages/index.tsx`: The main page that assembles all sections
 

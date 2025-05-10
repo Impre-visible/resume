@@ -1,4 +1,4 @@
-import resume from '@/assets/resume.json';
+import resume from '@/assets/resume/resume.json';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 

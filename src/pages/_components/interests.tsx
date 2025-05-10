@@ -1,4 +1,4 @@
-import resume from '@/assets/resume.json';
+import resume from '@/assets/resume/resume.json';
 import { Separator } from '@/components/ui/separator';
 
 export default function Interests() {

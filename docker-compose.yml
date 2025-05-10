@@ -4,3 +4,5 @@ services:
     container_name: resume
     ports:
       - "8080:80"
+    volumes:
+      - /DATA/AppData/resume:/usr/share/nginx/html/assets/resume
