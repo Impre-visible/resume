@@ -13,7 +13,7 @@ function EducationRow({
         <div className="flex flex-col gap-1 w-full">
             <div className="flex flex-row items-center justify-between gap-4 w-full">
                 <h2 className="font-bold text-xl">{educationItem.institution}</h2>
-                <p className="text-gray-500">{educationItem.date}</p>
+                <p className="text-gray-500 font-mono tabular-nums">{educationItem.date}</p>
             </div>
             <div className="flex flex-col items-start justify-center gap-1 w-full">
                 <p className="text-gray-500">{educationItem.studyType} - {educationItem.area}</p>
