@@ -1,8 +1,7 @@
-import basicsData from '@/assets/resume.json';
+import resume from '@/assets/resume.json';
 import { Separator } from '@/components/ui/separator';
 
-type EducationType = typeof basicsData.sections.education;
-type EducationItemType = typeof basicsData.sections.education.items[0];
+type EducationItemType = typeof resume.sections.education.items[0];
 
 function EducationRow({
     educationItem,
@@ -26,18 +25,14 @@ function EducationRow({
     )
 }
 
-export default function Education({
-    education,
-}: {
-    education: EducationType
-}) {
+export default function Education() {
     return (
         <>
             <Separator className="w-full bg-primary" />
             <div className="flex flex-col items-start justify-between gap-8 h-fit w-full rounded-lg">
-                <h1 className="font-bold text-3xl">{education.name}</h1>
+                <h1 className="font-bold text-3xl">{resume.sections.education.name}</h1>
                 <div className="flex flex-col items-start justify-center gap-6 h-fit w-full">
-                    {education.items.map((educationItem) => (
+                    {resume.sections.education.items.map((educationItem) => (
                         educationItem.visible && (
                             <EducationRow key={educationItem.id} educationItem={educationItem} />
                         )

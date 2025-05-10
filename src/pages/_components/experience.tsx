@@ -1,8 +1,7 @@
-import basicsData from '@/assets/resume.json';
+import resume from '@/assets/resume.json';
 import { Separator } from '@/components/ui/separator';
 
-type ExperienceType = typeof basicsData.sections.experience;
-type ExperienceItemType = typeof basicsData.sections.experience.items[0];
+type ExperienceItemType = typeof resume.sections.experience.items[0];
 
 function ExperienceRow({
     experienceItem,
@@ -25,18 +24,14 @@ function ExperienceRow({
     )
 }
 
-export default function Experience({
-    experience,
-}: {
-    experience: ExperienceType
-}) {
+export default function Experience() {
     return (
         <>
             <Separator className="w-full bg-primary" />
             <div className="flex flex-col items-start justify-between gap-8 h-fit w-full rounded-lg">
-                <h1 className="font-bold text-3xl">{experience.name}</h1>
+                <h1 className="font-bold text-3xl">{resume.sections.experience.name}</h1>
                 <div className="flex flex-col items-start justify-center gap-6 h-fit w-full">
-                    {experience.items.map((experienceItem) => (
+                    {resume.sections.experience.items.map((experienceItem) => (
                         experienceItem.visible && (
                             <ExperienceRow key={experienceItem.id} experienceItem={experienceItem} />
                         )
