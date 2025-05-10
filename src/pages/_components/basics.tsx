@@ -60,7 +60,7 @@ export default function Basics({
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                     <div className="text-center sm:text-left flex flex-col gap-2">
                         {basics.name && <h1 className="text-4xl font-bold text-primary">{basics.name}</h1>}
-                        {<p className="mt-1 text-1xl text-primary">{basics.headline} Teest test etest tetst qsdqsd qsd qsd qsd qsd qsd qd sdfsdfsqdfsdf sdf qsd qsd qsd qsd qsd qsd </p>}
+                        {basics.headline && <p className="mt-1 text-1xl text-primary">{basics.headline}</p>}
                     </div>
                 </div>
                 <section className="flex flex-col items-start gap-4">
