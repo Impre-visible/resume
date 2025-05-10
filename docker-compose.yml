@@ -1,0 +1,6 @@
+services:
+  resume:
+    image: imprevisible/resume
+    container_name: resume
+    ports:
+      - "8080:80"
