@@ -118,3 +118,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+#root {
+  @apply max-w-screen overflow-x-hidden;
+}
