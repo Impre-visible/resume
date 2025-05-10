@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@generouted/react-router": "^1.20.0",
-    "@icons-pack/react-simple-icons": "^12.7.0",
     "@tailwindcss/vite": "^4.1.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
