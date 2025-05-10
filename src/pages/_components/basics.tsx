@@ -1,5 +1,5 @@
-import resume from '@/assets/resume/resume.json';
-import { Badge } from '@/components/ui/badge';
+import { useResume, type Resume } from '@/lib/useResume'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button';
 
 import {
@@ -16,12 +16,12 @@ import {
     User,
     Calendar,
     Award,
-    type LucideIcon,
     Github,
     Linkedin,
+    type LucideIcon,
 } from "lucide-react"
 
-type ProfileType = typeof resume.sections.profiles.items[0];
+type ProfileType = Resume['sections']['profiles']['items'][number]
 
 const iconMap: Record<string, LucideIcon> = {
     mail: Mail,
@@ -42,6 +42,10 @@ const iconMap: Record<string, LucideIcon> = {
 }
 
 export default function Basics() {
+    const { resume, loading, error } = useResume()
+    if (loading) return <div>Chargement...</div>
+    if (error || !resume) return <div>Erreur lors du chargement du CV</div>
+
     const renderIcon = (iconName: string, className?: string) => {
         const IconComponent = iconMap[iconName.toLowerCase()] || User
         return <IconComponent className={`flex-shrink-0 text-gray-500 ${className}`} />

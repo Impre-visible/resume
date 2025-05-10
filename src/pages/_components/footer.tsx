@@ -1,10 +1,12 @@
-import resume from '@/assets/resume/resume.json';
-
-import { Separator } from '@/components/ui/separator';
-
-import { Copyright, Mail, MapPin, Phone } from 'lucide-react';
+import { useResume, type Resume } from '@/lib/useResume'
+import { Separator } from '@/components/ui/separator'
+import { Copyright, Mail, MapPin, Phone } from 'lucide-react'
 
 export default function Footer() {
+    const { resume, loading, error } = useResume()
+    if (loading) return <div>Chargement...</div>
+    if (error || !resume) return <div>Erreur lors du chargement du CV</div>
+
     return (
         <section className="flex flex-col items-center justify-center gap-8 w-full h-fit p-4 bg-gray-50 rounded-lg">
             <Separator className="bg-primary/25" />

@@ -1,7 +1,7 @@
-import resume from '@/assets/resume/resume.json';
-import { Separator } from '@/components/ui/separator';
+import { useResume, type Resume } from '@/lib/useResume'
+import { Separator } from '@/components/ui/separator'
 
-type EducationItemType = typeof resume.sections.education.items[0];
+type EducationItemType = Resume['sections']['education']['items'][number]
 
 function EducationRow({
     educationItem,
@@ -26,13 +26,17 @@ function EducationRow({
 }
 
 export default function Education() {
+    const { resume, loading, error } = useResume()
+    if (loading) return <div>Chargement...</div>
+    if (error || !resume) return <div>Erreur lors du chargement du CV</div>
+
     return (
         <>
             <Separator className="bg-primary/25" />
             <div className="flex flex-col items-start justify-between gap-8 h-fit w-full rounded-lg">
                 <h1 className="font-bold text-3xl">{resume.sections.education.name}</h1>
                 <div className="flex flex-col items-start justify-center gap-6 h-fit w-full">
-                    {resume.sections.education.items.map((educationItem) => (
+                    {resume.sections.education.items.map((educationItem: EducationItemType) => (
                         educationItem.visible && (
                             <EducationRow key={educationItem.id} educationItem={educationItem} />
                         )

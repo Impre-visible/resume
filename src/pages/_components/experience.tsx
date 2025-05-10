@@ -1,7 +1,7 @@
-import resume from '@/assets/resume/resume.json';
-import { Separator } from '@/components/ui/separator';
+import { useResume, type Resume } from '@/lib/useResume'
+import { Separator } from '@/components/ui/separator'
 
-type ExperienceItemType = typeof resume.sections.experience.items[0];
+type ExperienceItemType = Resume['sections']['experience']['items'][number]
 
 function ExperienceRow({
     experienceItem,
@@ -25,13 +25,17 @@ function ExperienceRow({
 }
 
 export default function Experience() {
+    const { resume, loading, error } = useResume()
+    if (loading) return <div>Chargement...</div>
+    if (error || !resume) return <div>Erreur lors du chargement du CV</div>
+
     return (
         <>
             <Separator className="bg-primary/25" />
             <div className="flex flex-col items-start justify-between gap-8 h-fit w-full rounded-lg">
                 <h1 className="font-bold text-3xl">{resume.sections.experience.name}</h1>
                 <div className="flex flex-col items-start justify-center gap-6 h-fit w-full">
-                    {resume.sections.experience.items.map((experienceItem) => (
+                    {resume.sections.experience.items.map((experienceItem: ExperienceItemType) => (
                         experienceItem.visible && (
                             <ExperienceRow key={experienceItem.id} experienceItem={experienceItem} />
                         )
