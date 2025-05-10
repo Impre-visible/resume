@@ -104,11 +104,14 @@ export default function Basics() {
                     </section>
                 </section>
             </div>
-            <img
-                src={resume.basics.picture.url !== "" ? resume.basics.picture.url : "https://storage.rxresu.me/cma7xyhyu3bhiq9p3kl3xcwxg/pictures/kgtx54slecbw4isrg60f02uc.jpg"}
-                alt={resume.basics.name}
-                className="object-cover aspect-square rounded-lg h-full min-h-[100px] max-h-32"
-            />
+            {/* Profile picture */}
+            {resume.basics.picture.url && (
+                <img
+                    src={resume.basics.picture.url}
+                    alt={resume.basics.name}
+                    className="object-cover aspect-square rounded-lg h-full min-h-[100px] max-h-32"
+                />
+            )}
         </div>
     )
 }
