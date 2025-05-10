@@ -284,7 +284,13 @@
           "description": "",
           "date": "2022 - 2025",
           "summary": "<p>Chocolate est un gestionnaire de médias gratuit et open source. Il vous permet de gérer votre collection de médias et de l'organiser de manière à ce qu'elle soit facile à utiliser et à rechercher.</p>",
-          "keywords": [],
+          "keywords": [
+            "React",
+            "Typescript",
+            "Tailwind CSS",
+            "Flask",
+            "Python"
+          ],
           "url": {
             "label": "",
             "href": "https://github.com/ChocolateApp"
@@ -297,7 +303,14 @@
           "description": "",
           "date": "2025",
           "summary": "<p>Cellule est une suite d'applications web interconnectées, offrant une alternative moderne, privée et auto-hébergée aux solutions propriétaires. Elle propose un accès illimité à vos applications sans restrictions ni quotas artificiels, avec un contrôle total sur vos données et une authentification unifiée via WebSocket.</p>",
-          "keywords": [],
+          "keywords": [
+            "React",
+            "Typescript",
+            "Tailwind CSS",
+            "shadcn/ui",
+            "Prisma",
+            "WebSocket"
+          ],
           "url": {
             "label": "",
             "href": "https://github.com/Cellule-org"
