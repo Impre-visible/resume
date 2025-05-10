@@ -1,4 +1,4 @@
-import { useResume, type Resume } from '@/lib/useResume'
+import { useResume } from '@/lib/useResume'
 import { Separator } from '@/components/ui/separator'
 import { Copyright, Mail, MapPin, Phone } from 'lucide-react'
 
