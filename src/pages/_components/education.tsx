@@ -10,7 +10,7 @@ function EducationRow({
 }) {
     return (
         <div className="flex flex-col gap-1 w-full">
-            <div className="flex flex-row items-center justify-between gap-4 w-full">
+            <div className="flex flex-row flex-wrap sm:items-center justify-between gap-4 w-full">
                 <h2 className="font-bold text-xl">{educationItem.institution}</h2>
                 <p className="text-gray-500 font-mono tabular-nums">{educationItem.date}</p>
             </div>
@@ -28,7 +28,7 @@ function EducationRow({
 export default function Education() {
     return (
         <>
-            <Separator className="w-full bg-primary" />
+            <Separator className="bg-primary/25" />
             <div className="flex flex-col items-start justify-between gap-8 h-fit w-full rounded-lg">
                 <h1 className="font-bold text-3xl">{resume.sections.education.name}</h1>
                 <div className="flex flex-col items-start justify-center gap-6 h-fit w-full">

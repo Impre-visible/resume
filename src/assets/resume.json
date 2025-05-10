@@ -354,7 +354,7 @@
           "visible": true,
           "name": "Javascript, Typescript",
           "description": "(Native, React, Angular, etc...)",
-          "level": 2,
+          "level": 0,
           "keywords": []
         },
         {

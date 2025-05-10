@@ -48,7 +48,7 @@ export default function Basics() {
     }
 
     return (
-        <div className="flex flex-row items-center justify-between gap-16 h-fit w-full rounded-lg">
+        <div className="flex flex-col-reverse sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-16 h-fit w-full rounded-lg">
             <div className="flex flex-col items-start justify-center gap-4 h-fit">
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                     <div className="text-center sm:text-left flex flex-col gap-2">
@@ -57,7 +57,7 @@ export default function Basics() {
                     </div>
                 </div>
                 <section className="flex flex-col items-start gap-4">
-                    <section className="grid grid-cols-2 sm:flex sm:flex-row items-start sm:items-center gap-4">
+                    <section className="flex flex-row flex-wrap items-start sm:items-center gap-4">
                         {/* Contact information */}
                         <Button variant="outline" className="w-11 h-11" asChild>
                             <a href={`mailto:${resume.basics.email}`}>
@@ -93,15 +93,15 @@ export default function Basics() {
                         ))}
 
                     </section>
-                    <section>
-
+                    <section className='flex flex-wrap gap-2'>
                         {resume.basics.customFields.map((field: typeof resume.basics.customFields[0]) => (
-                            <Badge key={field.id} className="flex flex-row items-center gap-2 text-md" >
+                            <Badge key={field.id} className="flex flex-row items-center gap-2 text-xs" >
                                 {renderIcon(field.icon, "text-secondary !h-4 !w-4")}
                                 {field.name}
                                 {field.value && <span >({field.value})</span>}
                             </Badge>
-                        ))}</section>
+                        ))}
+                    </section>
                 </section>
             </div>
             <img
