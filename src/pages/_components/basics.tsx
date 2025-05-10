@@ -66,12 +66,12 @@ export default function Basics({
     */
 
     return (
-        <div className="flex flex-row items-center justify-between gap-8 h-fit w-full rounded-lg p-8">
+        <div className="flex flex-row items-center justify-between gap-16 h-fit w-full rounded-lg p-8">
             <div className="flex flex-col items-start justify-center gap-4 h-fit">
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                     <div className="text-center sm:text-left flex flex-col gap-2">
-                        {basics.name && <h1 className="text-2xl font-bold text-primary">{basics.name}</h1>}
-                        {<p className="mt-1 text-lg  text-primary">{basics.headline} Teest test etest tetst qsdqsd qsd qsd qsd qsd qsd qd sdfsdfsqdfsdf sdf qsd qsd qsd qsd qsd qsd </p>}
+                        {basics.name && <h1 className="text-4xl font-bold text-primary">{basics.name}</h1>}
+                        {<p className="mt-1 text-1xl text-primary">{basics.headline} Teest test etest tetst qsdqsd qsd qsd qsd qsd qsd qd sdfsdfsqdfsdf sdf qsd qsd qsd qsd qsd qsd </p>}
                     </div>
                 </div>
                 <section className="flex flex-col items-start gap-4">
