@@ -29,12 +29,13 @@ export default function Experience({
     loading,
     error
 }: {
-    resume: any,
+    resume: Resume | null,
     loading: boolean,
     error: Error | null
 }) {
-    if (loading) return <div>Chargement...</div>
-    if (error || !resume) return <div>Erreur lors du chargement du CV</div>
+    if (loading) return null
+    if (error || !resume) return null
+    if (resume.sections.experience.items.length === 0) return null
 
     return (
         <>

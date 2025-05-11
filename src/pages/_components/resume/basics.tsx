@@ -46,12 +46,13 @@ export default function Basics({
     loading,
     error
 }: {
-    resume: any,
+    resume: Resume | null,
     loading: boolean,
     error: Error | null
 }) {
-    if (loading) return <div>Chargement...</div>
-    if (error || !resume) return <div>Erreur lors du chargement du CV</div>
+    if (loading) return null
+    if (error || !resume) return null
+    if (!resume.basics) return null
 
     const renderIcon = (iconName: string, className?: string) => {
         const IconComponent = iconMap[iconName.toLowerCase()] || User
@@ -70,29 +71,37 @@ export default function Basics({
                 <section className="flex flex-col items-start gap-4">
                     <section className="flex flex-row flex-wrap items-start sm:items-center gap-4">
                         {/* Contact information */}
-                        <Button variant="outline" className="w-11 h-11" asChild>
-                            <a href={`mailto:${resume.basics.email}`}>
-                                {renderIcon("mail")}
-                            </a>
-                        </Button>
+                        {resume.basics.email && (
+                            <Button variant="outline" className="w-11 h-11" asChild>
+                                <a href={`mailto:${resume.basics.email}`}>
+                                    {renderIcon("mail")}
+                                </a>
+                            </Button>
+                        )}
 
-                        <Button variant="outline" className="w-11 h-11" asChild>
-                            <a href={`tel:${resume.basics.phone}`}>
-                                {renderIcon("phone")}
-                            </a>
-                        </Button>
+                        {resume.basics.phone && (
+                            <Button variant="outline" className="w-11 h-11" asChild>
+                                <a href={`tel:${resume.basics.phone}`}>
+                                    {renderIcon("phone")}
+                                </a>
+                            </Button>
+                        )}
 
-                        <Button variant="outline" className="w-11 h-11" asChild>
-                            <a href={`https://www.google.com/maps/search/?api=1&query=${resume.basics.location}`} target='_blank' rel="noopener noreferrer">
-                                {renderIcon("pin")}
-                            </a>
-                        </Button>
+                        {resume.basics.location && (
+                            <Button variant="outline" className="w-11 h-11" asChild>
+                                <a href={`https://www.google.com/maps/search/?api=1&query=${resume.basics.location}`} target='_blank' rel="noopener noreferrer">
+                                    {renderIcon("pin")}
+                                </a>
+                            </Button>
+                        )}
 
-                        <Button variant="outline" className="w-11 h-11" asChild>
-                            <a href={resume.basics.url.href} target='_blank' rel="noopener noreferrer">
-                                {renderIcon("link")}
-                            </a>
-                        </Button>
+                        {resume.basics.url && resume.basics.url.href && (
+                            <Button variant="outline" className="w-11 h-11" asChild>
+                                <a href={resume.basics.url.href} target='_blank' rel="noopener noreferrer">
+                                    {renderIcon("link")}
+                                </a>
+                            </Button>
+                        )}
 
                         {/* Profiles */}
                         {resume.sections.profiles.items.map((profile: ProfileType) => (

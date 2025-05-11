@@ -7,12 +7,13 @@ export default function Languages({
     loading,
     error
 }: {
-    resume: any,
+    resume: Resume | null,
     loading: boolean,
     error: Error | null
 }) {
-    if (loading) return <div>Chargement...</div>
-    if (error || !resume) return <div>Erreur lors du chargement du CV</div>
+    if (loading) return null
+    if (error || !resume) return null
+    if (resume.sections.languages.items.length === 0) return null
 
     return (
         <>
@@ -20,7 +21,7 @@ export default function Languages({
             <div className="flex flex-col items-start justify-between gap-8 h-fit w-full rounded-lg">
                 <h1 className="font-bold text-3xl">{resume.sections.languages.name}</h1>
                 <div className="flex flex-row items-start flex-wrap gap-2">
-                    {resume.sections.languages.items.map((languageItem: Resume['sections']['languages']['items'][number]) => (
+                    {resume.sections.languages.items.map((languageItem) => (
                         languageItem.visible && (
                             <Badge key={languageItem.id}>
                                 {languageItem.name}
