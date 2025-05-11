@@ -6,6 +6,7 @@ const cors = require('cors')
 
 const app = express()
 const PORT = 3000
+const BACKEND_DIR = "/"
 const RESUME_DIR = '/usr/share/nginx/html/assets/resume'
 const PASSCODE = process.env.PASSCODE
 const DEFAULT_LANG = process.env.DEFAULT_LANG || 'fr'
@@ -23,8 +24,19 @@ function checkPasscode(req, res, next) {
     next()
 }
 
+const cleanDefaultResume = () => {
+    const file = path.join(RESUME_DIR, "en", "temp_resume.json")
+    if (fs.existsSync(file)) {
+        fs.unlink(file, (err) => {
+            if (err) console.error('Error deleting default resume:', err)
+            else console.log('Default resume deleted successfully')
+        })
+    }
+}
+
 // Upload CV (champ: resume)
 app.post('/api/resume', checkPasscode, upload.single('resume'), (req, res) => {
+    cleanDefaultResume()
     const lang = req.body.lang || req.query.lang || DEFAULT_LANG
     if (!req.file) return res.status(400).json({ error: 'No file uploaded' })
 
@@ -66,12 +78,12 @@ app.get('/api/resume/list', (req, res) => {
 app.get('/api/resume/latest', (req, res) => {
     const lang = req.query.lang || DEFAULT_LANG
     const dir = path.join(RESUME_DIR, lang)
-    if (!fs.existsSync(dir)) return res.status(404).json({ error: 'Not found' })
+    if (!fs.existsSync(dir)) return res.sendFile(path.join(BACKEND_DIR, "assets", "temp_resume.json"))
     const files = fs.readdirSync(dir)
         .filter(f => f.startsWith(`resume.${lang}.`) && f.endsWith('.json'))
         .sort()
         .reverse()
-    if (!files.length) return res.status(404).json({ error: 'Not found' })
+    if (!files.length) return res.sendFile(path.join(BACKEND_DIR, "assets", "temp_resume.json"))
     res.sendFile(path.join(dir, files[0]))
 })
 
@@ -98,12 +110,12 @@ app.get('/api/versions', (req, res) => {
 
 const getLatestResume = (_req, res, lang) => {
     const dir = path.join(RESUME_DIR, lang)
-    if (!fs.existsSync(dir)) return res.status(404).json({ error: 'Not found' })
+    if (!fs.existsSync(dir)) return res.sendFile(path.join(BACKEND_DIR, "assets", "temp_resume.json"))
     const files = fs.readdirSync(dir)
         .filter(f => f.startsWith(`resume.${lang}.`) && f.endsWith('.json'))
         .sort()
         .reverse()
-    if (!files.length) return res.status(404).json({ error: 'Not found' })
+    if (!files.length) return res.sendFile(path.join(BACKEND_DIR, "assets", "temp_resume.json"))
     filename = files[0]
     return res.sendFile(path.join(dir, filename))
 }

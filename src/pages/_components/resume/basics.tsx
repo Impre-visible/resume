@@ -105,7 +105,7 @@ export default function Basics({
 
                     </section>
                     <section className='flex flex-wrap gap-2'>
-                        {resume.basics.customFields.map((field: typeof resume.basics.customFields[0]) => (
+                        {resume.basics.customFields && resume.basics.customFields.map((field: typeof resume.basics.customFields[0]) => (
                             <Badge key={field.id} className="flex flex-row items-center gap-2 text-xs" >
                                 {renderIcon(field.icon, "text-secondary !h-4 !w-4")}
                                 {field.name}
