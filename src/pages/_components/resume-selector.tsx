@@ -71,16 +71,18 @@ const ResumeSelector = ({
     }, [selectedLanguage]);
 
     return (
-        <div className="fixed top-2.5 right-2.5 z-50 flex flex-col space-y-2">
+        <div className="fixed top-2.5 right-2.5 z-50 flex-col space-y-2 hidden md:flex">
             <Select onValueChange={(value) => setSelectedLanguage(value)}>
-                <SelectTrigger className="w-48">
+                <SelectTrigger className="w-32 md:w-48 bg-white">
                     <SelectValue placeholder="Select Language" />
                 </SelectTrigger>
                 <SelectContent>
                     {langs.filter(lang => languages.includes(lang.value)).map(({ label, value, emoji }) => (
-                        <SelectItem key={value} value={value}>
-                            {emoji} {label}
-                        </SelectItem>
+                        <>
+                            <SelectItem key={value} value={value} className="hidden md:flex">
+                                {emoji}{" - "}{label}
+                            </SelectItem>
+                        </>
                     ))}
                     {languages.length === 0 && (
                         <SelectItem value="none" disabled>
@@ -90,13 +92,14 @@ const ResumeSelector = ({
                 </SelectContent>
             </Select>
             <Select onValueChange={(value) => setSelectedVersion(value)} disabled={!selectedLanguage}>
-                <SelectTrigger className="w-48">
+                <SelectTrigger className="w-32 md:w-48 bg-white">
                     <SelectValue placeholder="Select Version" />
                 </SelectTrigger>
                 <SelectContent>
-                    {versions.map((version, _index) => (
+                    {versions.map((version, index) => (
                         <SelectItem key={version} value={version}>
-                            {getDateFromFilename(version)}
+                            {getDateFromFilename(version)} {" "}
+                            {index === 0 && <span className="text-xs text-gray-500"> (latest)</span>}
                         </SelectItem>
                     ))}
                 </SelectContent>
