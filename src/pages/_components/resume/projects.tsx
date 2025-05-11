@@ -1,6 +1,8 @@
 import { type Resume } from '@/lib/useResume'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import { Button } from '@/components/ui/button'
+import { ExternalLink } from 'lucide-react'
 
 type ProjectItemType = Resume['sections']['projects']['items'][number]
 
@@ -12,8 +14,16 @@ function ProjectsRow({
     return (
         <div>
             <div className="flex flex-col gap-1 w-full">
-                <div className="flex flex-row items-center justify-between gap-4 w-full"></div>
-                <h2 className="font-bold text-xl">{projectItem.name}</h2>
+                <div className="flex flex-row items-center justify-between gap-4 w-full">
+                    <h2 className="font-bold text-xl">{projectItem.name}</h2>
+                    {projectItem.url && projectItem.url.href && (
+                        <Button variant="link" className="text-gray-500 hover:text-gray-700" asChild>
+                            <a href={projectItem.url.href} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink className="flex-shrink-0 w-4" />
+                            </a>
+                        </Button>
+                    )}
+                </div>
                 <p className="text-gray-500 font-mono tabular-nums">{projectItem.date}</p>
             </div>
             {
