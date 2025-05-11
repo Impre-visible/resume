@@ -5,6 +5,6 @@ services:
     ports:
       - "8080:80"
     environment:
-      - PASSCODE=ton_mot_de_passe
+      - PASSCODE=your_passcode_to_add_and_delete_resume
     volumes:
       - /DATA/AppData/resume:/usr/share/nginx/html/assets/resume
