@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from "sonner"
+import { Download, Trash2 } from "lucide-react"
 
 const langs = [
     { label: "Français", value: "fr", emoji: "🇫🇷" },
@@ -49,6 +50,36 @@ export default function ResumeAdmin() {
         }
     }
 
+    const handleDownload = async (filename: string) => {
+        const res = await fetch(`/api/resume/download?filename=${filename}`)
+        if (!res.ok) {
+            toast.error("Download failed")
+            return
+        }
+        const blob = await res.blob()
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement("a")
+        a.href = url
+        a.download = filename
+        a.click()
+        URL.revokeObjectURL(url)
+        toast.success("Download successful")
+    }
+
+    const handleDelete = async (filename: string) => {
+        const res = await fetch(`/api/resume/delete?filename=${filename}`, {
+            method: "DELETE",
+            headers: { "x-passcode": passcode },
+        })
+        if (res.ok) {
+            toast.success("Delete successful")
+            setHistory(prev => prev.filter(f => f !== filename))
+        } else {
+            const error = await res.json()
+            toast.error(`Delete failed: ${error.message}`)
+        }
+    }
+
     React.useEffect(() => { fetchHistory() }, [lang])
 
     return (
@@ -77,8 +108,19 @@ export default function ResumeAdmin() {
                     </form>
                     <div className="mt-4">
                         <h3 className="font-semibold">History</h3>
-                        <ul className="text-xs list-disc pl-5">
-                            {history.map(f => <li key={f}>{f}</li>)}
+                        <ul className="text-sm list-disc pl-5">
+                            {history.map(f =>
+                                <li key={f} className="flex flex-row items-center justify-between">
+                                    {f}
+                                    <section className="flex flex-row items-center justify-end">
+                                        <Button variant="outline" className="ml-2" onClick={() => handleDownload(f)}>
+                                            <Download className="w-4 h-4" />
+                                        </Button>
+                                        <Button variant="outline" className="ml-2" onClick={() => handleDelete(f)}>
+                                            <Trash2 className="w-4 h-4" />
+                                        </Button>
+                                    </section>
+                                </li>)}
                         </ul>
                     </div>
                 </CardContent>
