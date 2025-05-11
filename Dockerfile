@@ -1,8 +1,8 @@
 FROM node:24-slim AS build
 
-WORKDIR /app
+COPY frontend /app
 
-COPY package*.json ./
+WORKDIR /app
 RUN npm install
 COPY . .
 RUN npm run build
