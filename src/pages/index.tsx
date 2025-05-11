@@ -47,8 +47,8 @@ export default function Home() {
                 </section>
             )}
             {!error && (
-                <section className="flex flex-col gap-8 items-center justify-start py-4 px-2 sm:p-4 md:p-8 lg:p-24 h-full w-screen max-w-screen overflow-x-hidden">
-                    <section className="flex flex-col gap-6 items-start justify-center w-full lg:w-3xl">
+                <section className="flex flex-col gap-8 items-center justify-start py-4 px-2 sm:p-4 md:p-8 lg:p-24 w-screen max-w-screen overflow-x-hidden min-h-screen h-fill">
+                    <section className="flex flex-col gap-6 items-start justify-between w-full h-full lg:w-3xl">
                         <Basics resume={resume} loading={loading} error={error} />
                         <Languages resume={resume} loading={loading} error={error} />
                         <Education resume={resume} loading={loading} error={error} />
