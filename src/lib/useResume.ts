@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react"
-
 export interface Resume {
     basics: {
         name: string
@@ -101,24 +99,4 @@ export interface Resume {
         }
         [key: string]: any
     }
-}
-
-export function useResume() {
-    const [resume, setResume] = useState<Resume | null>(null)
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState<Error | null>(null)
-
-    useEffect(() => {
-        setLoading(true)
-        fetch("/src/assets/resume/resume.json")
-            .then((res) => {
-                if (!res.ok) throw new Error("Erreur lors du chargement du CV")
-                return res.json()
-            })
-            .then(setResume)
-            .catch(setError)
-            .finally(() => setLoading(false))
-    }, [])
-
-    return { resume, loading, error }
 }

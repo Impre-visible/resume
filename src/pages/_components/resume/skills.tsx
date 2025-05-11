@@ -1,9 +1,16 @@
-import { useResume, type Resume } from '@/lib/useResume'
+import { type Resume } from '@/lib/useResume'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 
-export default function Skills() {
-    const { resume, loading, error } = useResume()
+export default function Skills({
+    resume,
+    loading,
+    error
+}: {
+    resume: any,
+    loading: boolean,
+    error: Error | null
+}) {
     if (loading) return <div>Chargement...</div>
     if (error || !resume) return <div>Erreur lors du chargement du CV</div>
 

@@ -4,5 +4,7 @@ services:
     container_name: resume
     ports:
       - "8080:80"
+    environment:
+      - PASSCODE=ton_mot_de_passe
     volumes:
       - /DATA/AppData/resume:/usr/share/nginx/html/assets/resume

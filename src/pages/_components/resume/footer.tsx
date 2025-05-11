@@ -1,9 +1,15 @@
-import { useResume } from '@/lib/useResume'
 import { Separator } from '@/components/ui/separator'
 import { Copyright, Mail, MapPin, Phone } from 'lucide-react'
 
-export default function Footer() {
-    const { resume, loading, error } = useResume()
+export default function Footer({
+    resume,
+    loading,
+    error
+}: {
+    resume: any,
+    loading: boolean,
+    error: Error | null
+}) {
     if (loading) return <div>Chargement...</div>
     if (error || !resume) return <div>Erreur lors du chargement du CV</div>
 

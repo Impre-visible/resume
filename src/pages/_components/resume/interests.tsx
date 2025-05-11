@@ -1,8 +1,17 @@
-import { useResume, type Resume } from '@/lib/useResume'
 import { Separator } from '@/components/ui/separator'
+import type { Resume } from '@/lib/useResume'
 
-export default function Interests() {
-    const { resume, loading, error } = useResume()
+type InterestItemType = Resume['sections']['interests']['items'][number]
+
+export default function Interests({
+    resume,
+    loading,
+    error
+}: {
+    resume: any,
+    loading: boolean,
+    error: Error | null
+}) {
     if (loading) return <div>Chargement...</div>
     if (error || !resume) return <div>Erreur lors du chargement du CV</div>
 
@@ -12,7 +21,7 @@ export default function Interests() {
             <div className="flex flex-col items-start justify-between gap-8 h-fit w-full rounded-lg">
                 <h1 className="font-bold text-3xl">{resume.sections.interests.name}</h1>
                 <div className="flex flex-col items-start flex-wrap gap-2">
-                    {resume.sections.interests.items.map((interestItem: Resume['sections']['interests']['items'][number]) => (
+                    {resume.sections.interests.items.map((interestItem: InterestItemType) => (
                         interestItem.visible && (
                             <div key={interestItem.id} className="flex flex-row items-start gap-2">
                                 <h2 className="font-mono">

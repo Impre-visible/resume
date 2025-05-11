@@ -1,4 +1,4 @@
-import { useResume, type Resume } from '@/lib/useResume'
+import { type Resume } from '@/lib/useResume'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button';
 
@@ -41,8 +41,15 @@ const iconMap: Record<string, LucideIcon> = {
     linkedin: Linkedin
 }
 
-export default function Basics() {
-    const { resume, loading, error } = useResume()
+export default function Basics({
+    resume,
+    loading,
+    error
+}: {
+    resume: any,
+    loading: boolean,
+    error: Error | null
+}) {
     if (loading) return <div>Chargement...</div>
     if (error || !resume) return <div>Erreur lors du chargement du CV</div>
 
