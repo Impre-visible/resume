@@ -97,7 +97,6 @@ app.get('/api/languages', (req, res) => {
 })
 
 app.get('/api/versions', (req, res) => {
-    dir
     let lang = req.query.lang || DEFAULT_LANG
     const dir = path.join(RESUME_DIR, lang)
     if (!fs.existsSync(dir)) return res.json({ versions: [] })
@@ -140,6 +139,40 @@ app.get('/api/resume', (req, res) => {
     res.sendFile(filePath)
 })
 
-app.listen(PORT, '127.0.0.1', () => {
-    console.log(`Backend listening on 127.0.0.1:${PORT}`)
+// Télécharger un CV spécifique
+app.get('/api/resume/download', (req, res) => {
+    const filename = req.query.filename
+    if (!filename || filename.split('.').length < 3) {
+        return res.status(400).json({ error: 'Missing or invalid filename' })
+    }
+    const lang = filename.split('.')[1]
+    const filePath = path.join(RESUME_DIR, lang, filename)
+    if (!fs.existsSync(filePath)) {
+        return res.status(404).json({ error: 'File not found' })
+    }
+    res.download(filePath, filename)
+})
+
+// Supprimer un CV spécifique (auth requis)
+app.delete('/api/resume/delete', checkPasscode, (req, res) => {
+    const filename = req.query.filename
+    if (!filename || filename.split('.').length < 3) {
+        return res.status(400).json({ error: 'Missing or invalid filename' })
+    }
+    const lang = filename.split('.')[1]
+    const filePath = path.join(RESUME_DIR, lang, filename)
+    if (!fs.existsSync(filePath)) {
+        return res.status(404).json({ error: 'File not found' })
+    }
+    fs.unlink(filePath, (err) => {
+        if (err) {
+            console.error('Delete error:', err)
+            return res.status(500).json({ error: 'Delete failed', details: err.message })
+        }
+        res.json({ message: 'File deleted successfully', file: filename })
+    })
+})
+
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Backend listening on 0.0.0.0:${PORT}`)
 })
