@@ -23,7 +23,7 @@ export default function Home() {
 		setLoading(true);
 		setError(null);
 		fetch(
-			`${import.meta.env.VITE_BACKEND_URL}/api/resume?filename=${encodeURIComponent(selectedVersion)}`,
+			`${import.meta.env.VITE_BACKEND_URL || ""}/api/resume?filename=${encodeURIComponent(selectedVersion)}`,
 		)
 			.then((res) => {
 				if (!res.ok) throw new Error("Erreur lors du chargement du CV");

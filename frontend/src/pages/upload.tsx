@@ -31,7 +31,7 @@ export default function ResumeAdmin() {
 
 	const fetchHistory = async () => {
 		const res = await fetch(
-			`${import.meta.env.VITE_BACKEND_URL}/api/resume/list?lang=${lang}`,
+			`${import.meta.env.VITE_BACKEND_URL || ""}/api/resume/list?lang=${lang}`,
 		);
 		const data = await res.json();
 		setHistory(data.files);
@@ -44,11 +44,14 @@ export default function ResumeAdmin() {
 		formData.append("resume", file);
 		formData.append("lang", lang);
 		formData.append("passcode", passcode);
-		const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/resume`, {
-			method: "POST",
-			headers: { "x-passcode": passcode },
-			body: formData,
-		});
+		const res = await fetch(
+			`${import.meta.env.VITE_BACKEND_URL || ""}/api/resume`,
+			{
+				method: "POST",
+				headers: { "x-passcode": passcode },
+				body: formData,
+			},
+		);
 		if (res.ok) {
 			toast.success("Upload successful");
 			fetchHistory();
@@ -60,7 +63,7 @@ export default function ResumeAdmin() {
 
 	const handleDownload = async (filename: string) => {
 		const res = await fetch(
-			`${import.meta.env.VITE_BACKEND_URL}/api/resume/download?filename=${filename}`,
+			`${import.meta.env.VITE_BACKEND_URL || ""}/api/resume/download?filename=${filename}`,
 		);
 		if (!res.ok) {
 			toast.error("Download failed");
@@ -78,7 +81,7 @@ export default function ResumeAdmin() {
 
 	const handleDelete = async (filename: string) => {
 		const res = await fetch(
-			`${import.meta.env.VITE_BACKEND_URL}/api/resume/delete?filename=${filename}`,
+			`${import.meta.env.VITE_BACKEND_URL || ""}/api/resume/delete?filename=${filename}`,
 			{
 				method: "DELETE",
 				headers: { "x-passcode": passcode },

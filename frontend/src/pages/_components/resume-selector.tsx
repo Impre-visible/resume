@@ -45,7 +45,7 @@ const ResumeSelector = ({
 		const fetchLanguages = async () => {
 			try {
 				const response = await fetch(
-					`${import.meta.env.VITE_BACKEND_URL}/api/languages`,
+					`${import.meta.env.VITE_BACKEND_URL || ""}/api/languages`,
 				);
 				const data = await response.json();
 				setLanguages(data.languages);
@@ -62,7 +62,7 @@ const ResumeSelector = ({
 			const fetchVersions = async () => {
 				try {
 					const response = await fetch(
-						`${import.meta.env.VITE_BACKEND_URL}/api/versions?lang=${selectedLanguage}`,
+						`${import.meta.env.VITE_BACKEND_URL || ""}/api/versions?lang=${selectedLanguage}`,
 					);
 					const data = await response.json();
 					setVersions(data.versions);
