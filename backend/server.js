@@ -4,10 +4,12 @@ const fs = require('fs')
 const path = require('path')
 const cors = require('cors')
 
+require('dotenv').config({ path: path.join(__dirname, '.env') })
+
 const app = express()
 const PORT = 3000
 const BACKEND_DIR = "/"
-const RESUME_DIR = '/usr/share/nginx/html/assets/resume'
+const RESUME_DIR = process.env.RESUME_DIR || '/usr/share/nginx/html/assets/resume'
 const PASSCODE = process.env.PASSCODE
 const DEFAULT_LANG = process.env.DEFAULT_LANG || 'fr'
 
